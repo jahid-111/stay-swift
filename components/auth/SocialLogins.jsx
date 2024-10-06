@@ -2,15 +2,27 @@
 
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
-const SocialLogins = () => {
+const SocialLogins = ({ mode }) => {
   const handleAuth = (provider) => {
     signIn(provider, { callbackUrl: "http://localhost:3000/bookings" });
   };
 
   return (
     <>
-      <div className="text-center text-xs text-gray-500">or Signup with</div>
+      <div className="text-center text-xs text-gray-500">
+        {mode === "register" ? (
+          <Link href="login" className="underline">
+            Login
+          </Link>
+        ) : (
+          <Link href="register" className="underline">
+            Register
+          </Link>
+        )}
+        <p className="inline"> or SignUp with</p>
+      </div>
       <div className="flex gap-4">
         <button
           onClick={() => handleAuth("facebook")}
