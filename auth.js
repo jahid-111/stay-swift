@@ -26,12 +26,14 @@ export const {
 
       async authorize(credentials) {
         if (credentials == null) return null;
-
         try {
           const user = await userModel.findOne({ email: credentials.email });
 
           if (user) {
-            const isMatch = user.email === credentials.email;
+            const isMatch = await bcryptjs.compare(
+              credentials.password,
+              user.password
+            );
 
             if (isMatch) {
               return user;
@@ -39,7 +41,7 @@ export const {
               throw new Error("Email or Password Not Matching");
             }
           } else {
-            throw new Error("User Not Found");
+            throw new Error("User not found");
           }
         } catch (err) {
           throw new Error(err);

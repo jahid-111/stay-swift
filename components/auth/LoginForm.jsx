@@ -13,7 +13,6 @@ const LoginForm = () => {
     try {
       const formData = new FormData(e.currentTarget);
       const response = await login(formData);
-      console.log("🥹CHECK", response);
 
       if (!!response.error) {
         setError(response.error.message);
