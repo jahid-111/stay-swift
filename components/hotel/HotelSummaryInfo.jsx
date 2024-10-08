@@ -16,6 +16,7 @@ const HotelSummaryInfo = ({ hotelInfo, fromListPage }) => {
           <RatingHotel id={hotelInfo?.id} />
           |
           <ReviewHotel id={hotelInfo?.id} />
+          {/* ==={hotelInfo?.isBooked && <div>Booked</div>} */}
         </div>
         <div>
           <span className="font-semibold text-xl bg-gray-200 px-3  rounded-sm ">

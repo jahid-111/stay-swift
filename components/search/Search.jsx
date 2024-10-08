@@ -36,7 +36,7 @@ const Search = ({ fromList, destination, checkin, checkout }) => {
     params.set("destination", searchTerm?.destination);
     if (searchTerm.checkin && searchTerm.checkout) {
       params.set("checkin", searchTerm?.checkin);
-      params.set("checout", searchTerm?.checkout);
+      params.set("checkout", searchTerm?.checkout);
     }
     if (pathName.includes("hotels")) {
       replace(`${pathName}?${params.toString()}`);
