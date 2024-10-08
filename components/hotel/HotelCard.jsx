@@ -7,9 +7,9 @@ const HotelCard = ({ hotel }) => {
       <Image
         src={hotel?.thumbNailUrl}
         className="max-h-[162px] max-w-[240px] rounded-md"
-        alt=""
-        width={600}
-        height={400}
+        alt={hotel?.name}
+        width={280}
+        height={200}
       />
       <HotelSummaryInfo hotelInfo={hotel} fromListPage={true} />
     </div>
