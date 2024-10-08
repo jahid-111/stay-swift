@@ -18,7 +18,7 @@ const HotelSummaryInfo = ({ hotelInfo, fromListPage }) => {
           <ReviewHotel id={hotelInfo?.id} />
         </div>
         <div>
-          <span className="font-semibold text-xl">
+          <span className="font-semibold text-xl bg-gray-200 px-3  rounded-sm ">
             {hotelInfo?.propertyCategory} ⭐
           </span>
         </div>
