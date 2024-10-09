@@ -4,9 +4,11 @@ import Summary from "@/components/hotel/details/Summary";
 import { getHotelById } from "@/data/queries";
 import React from "react";
 
-const DetailsPage = async ({ params: { id } }) => {
-  const hotelIfo = await getHotelById(id);
-  // console.log(hotelIfo);
+const DetailsPage = async ({
+  params: { id },
+  searchParams: { checkin, checkout },
+}) => {
+  const hotelIfo = await getHotelById(id, checkin, checkout);
 
   return (
     <>

@@ -31,9 +31,9 @@ export async function getAllHotels(destination, checkin, checkout) {
         const found = await findBooking(hotel._id, checkin, checkout);
 
         if (found) {
-          hotel["isBooked"] = true;
+          allHotels["isBooked"] = true;
         } else {
-          hotel["isBooked"] = false;
+          allHotels["isBooked"] = false;
         }
 
         return hotel;
@@ -58,8 +58,17 @@ async function findBooking(hotelId, checkin, checkout) {
   return found;
 }
 
-export async function getHotelById(hotelId) {
+export async function getHotelById(hotelId, checkin, checkout) {
   const hotel = await hotelModel.findById(hotelId).lean();
+
+  if (checkin && checkout) {
+    const found = await findBooking(hotel._id, checkin, checkout);
+    if (found) {
+      hotel["isBooked"] = true;
+    } else {
+      hotel["isBooked"] = false;
+    }
+  }
   return replaceMongoIdInObject(hotel);
 }
 export async function getRatingsForHotel(hotelId) {
