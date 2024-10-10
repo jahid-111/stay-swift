@@ -41,6 +41,7 @@ const PaymentPage = async ({
           hotelInfo={hotelInfo}
           checkin={checkin}
           checkout={checkout}
+          payMoney={cost}
         />
       </div>
     </section>

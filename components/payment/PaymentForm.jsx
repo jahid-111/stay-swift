@@ -6,6 +6,7 @@ import { useState } from "react";
 const PaymentForm = ({
   loggedInUser,
   hotelInfo,
+  payMoney,
   checkin: initialCheckin,
   checkout: initialCheckout,
 }) => {
@@ -140,7 +141,7 @@ const PaymentForm = ({
         </div>
 
         <button type="submit" className="btn-primary w-full">
-          Pay Now ($10)
+          Pay Now ({payMoney})
         </button>
       </form>
     </>

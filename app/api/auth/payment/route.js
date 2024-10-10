@@ -23,6 +23,10 @@ export const POST = async (request) => {
       { status: 201 }
     );
   } catch (error) {
-    return new NextResponse(error.message, { status: 500 });
+    console.error("Booking Error:", error);
+    return NextResponse.json(
+      { error: error.message || "Booking failed" },
+      { status: 500 }
+    );
   }
 };
