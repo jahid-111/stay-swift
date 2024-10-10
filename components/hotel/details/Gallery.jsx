@@ -16,9 +16,9 @@ const Gallery = ({ gallery }) => {
         />
 
         <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
-          {sideImage?.map((img) => (
+          {sideImage?.map((img, i) => (
             <Image
-              key={img}
+              key={i}
               src={img}
               alt="Sub-Image"
               className=" "

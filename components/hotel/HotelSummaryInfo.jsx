@@ -5,7 +5,7 @@ import ReviewHotel from "./ReviewHotel";
 const HotelSummaryInfo = ({ hotelInfo, checkin, checkout, fromListPage }) => {
   let params = "";
   if (checkin && checkout) {
-    params = `?checkin${checkin}&checkout=${checkout}`;
+    params = `?checkin=${checkin}&checkout=${checkout}`;
   }
   return (
     <>
@@ -46,7 +46,12 @@ const HotelSummaryInfo = ({ hotelInfo, checkin, checkout, fromListPage }) => {
         ) : hotelInfo.isBooked ? (
           <button className="btn-primary ">Notify Me</button>
         ) : (
-          <button className="btn-primary ">Book</button>
+          <Link
+            href={`/hotels/${hotelInfo?.id}/payment${params}`}
+            className="btn-primary "
+          >
+            Book
+          </Link>
         )}
       </div>
     </>
