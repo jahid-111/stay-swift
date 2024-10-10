@@ -38,6 +38,7 @@ const PaymentPage = async ({
         </p>
         <PaymentForm
           loggedInUser={loggedInUser}
+          hotelInfo={hotelInfo}
           checkin={checkin}
           checkout={checkout}
         />
