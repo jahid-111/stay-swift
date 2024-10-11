@@ -9,7 +9,13 @@ import {
   replaceMongoIdInObject,
 } from "@/utils/data-util";
 
-export async function getAllHotels(destination, checkin, checkout, category) {
+export async function getAllHotels(
+  destination,
+  checkin,
+  checkout,
+  category,
+  priceRange
+) {
   const regex = new RegExp(destination, "i");
 
   const hotelsByDestination = await hotelModel
@@ -25,11 +31,21 @@ export async function getAllHotels(destination, checkin, checkout, category) {
     .lean();
 
   let allHotels = hotelsByDestination;
+
   if (category) {
     const categoriesToMatch = category.split("|");
     allHotels = allHotels.filter((hotel) => {
       return categoriesToMatch.includes(hotel.propertyCategory.toString());
     });
+  }
+
+  if (priceRange) {
+    if (priceRange === "highToLow") {
+      allHotels = allHotels.sort((a, b) => b.highRate - a.highRate);
+    }
+    if (priceRange === "lowToHigh") {
+      allHotels = allHotels.sort((a, b) => a.lowRate - b.lowRate);
+    }
   }
 
   if (checkin && checkout) {
