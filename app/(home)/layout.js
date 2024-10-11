@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
 import { dbConnect } from "@/service/mongo";
+import { Suspense } from "react";
+import Loading from "@/components/utilComponents/Loading";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -27,7 +29,9 @@ export default async function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar sideMenu={true} />
-        <main>{children}</main>
+        <Suspense fallback={<Loading />}>
+          <main>{children}</main>
+        </Suspense>
       </body>
     </html>
   );
