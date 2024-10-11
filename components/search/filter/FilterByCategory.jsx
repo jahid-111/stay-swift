@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 const FilterByCategory = () => {
   const [query, setQuery] = useState([]);
-  console.log(query);
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();

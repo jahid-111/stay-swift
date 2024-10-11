@@ -8,6 +8,6 @@ export async function dbConnect() {
     console.log("✔️✔️ Db Connect Successfully");
     return connect;
   } catch (error) {
-    console.error("🥲 🥲 DB Not Connected🥲🥲", error);
+    console.error("🔴✖️DB Not Connected 🔴✖️", error);
   }
 }
