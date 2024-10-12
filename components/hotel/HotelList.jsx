@@ -7,14 +7,14 @@ const HotelList = async ({
   checkin,
   checkout,
   category,
-  priceRange,
+  sortBy,
 }) => {
   const allHotels = await getAllHotels(
     destination,
     checkin,
     checkout,
     category,
-    priceRange
+    sortBy
   );
 
   // console.log("priceRange",allHotels);

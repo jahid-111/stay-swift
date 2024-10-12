@@ -19,7 +19,7 @@ const SortHotel = () => {
   };
 
   useEffect(() => {
-    const sortName = params.get("range");
+    const sortName = params.get("sort");
     if (sortName) {
       setPriceSort(sortName);
     }
@@ -27,13 +27,11 @@ const SortHotel = () => {
 
   useEffect(() => {
     if (priceSort) {
-      params.set("range", encodeURI(priceSort));
+      params.set("sort", encodeURI(priceSort));
     } else {
-      params.delete("range");
+      params.delete("sort");
     }
     replace(`${pathName}?${params?.toString()}`);
-    // setPriceSort()
-    // console.log(params.toString());
   }, [priceSort]);
 
   return (

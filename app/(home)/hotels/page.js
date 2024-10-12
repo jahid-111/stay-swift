@@ -13,9 +13,9 @@ const refineCategory = (category) => {
 };
 
 const HotelListPage = ({
-  searchParams: { destination, checkin, checkout, category, range },
+  searchParams: { destination, checkin, checkout, category, sort },
 }) => {
-  // console.log("⭐⭐⭐ range :", range);
+  // console.log("⭐⭐⭐ range :", sort);
   return (
     <>
       <section className="bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center pt-[100px] pb-[60px]">
@@ -38,7 +38,7 @@ const HotelListPage = ({
               checkin={checkin}
               checkout={checkout}
               category={refineCategory(category)}
-              priceRange={range}
+              sortBy={sort}
             />
           </Suspense>
         </div>

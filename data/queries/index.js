@@ -14,7 +14,7 @@ export async function getAllHotels(
   checkin,
   checkout,
   category,
-  priceRange
+  sortByPrice
 ) {
   const regex = new RegExp(destination, "i");
 
@@ -39,11 +39,11 @@ export async function getAllHotels(
     });
   }
 
-  if (priceRange) {
-    if (priceRange === "highToLow") {
+  if (sortByPrice) {
+    if (sortByPrice === "highToLow") {
       allHotels = allHotels.sort((a, b) => b.highRate - a.highRate);
     }
-    if (priceRange === "lowToHigh") {
+    if (sortByPrice === "lowToHigh") {
       allHotels = allHotels.sort((a, b) => a.lowRate - b.lowRate);
     }
   }
