@@ -4,18 +4,18 @@ import Search from "@/components/search/Search";
 import Loading from "@/components/utilComponents/Loading";
 import React, { Suspense } from "react";
 
-const refineCategory = (category) => {
-  const decodedCategory = decodeURI(category);
-  if (decodedCategory === "undefined") {
+const refineEncode = (Value) => {
+  const decodedValue = decodeURI(Value);
+  if (decodedValue === "undefined") {
     return "";
   }
-  return decodedCategory;
+  return decodedValue;
 };
 
 const HotelListPage = ({
-  searchParams: { destination, checkin, checkout, category, sort },
+  searchParams: { destination, checkin, checkout, category, sort, range },
 }) => {
-  // console.log("⭐⭐⭐ range :", sort);
+  // console.log("⭐⭐⭐ range :", range);
   return (
     <>
       <section className="bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center pt-[100px] pb-[60px]">
@@ -37,8 +37,9 @@ const HotelListPage = ({
               destination={destination}
               checkin={checkin}
               checkout={checkout}
-              category={refineCategory(category)}
               sortBy={sort}
+              category={refineEncode(category)}
+              range={refineEncode(range)}
             />
           </Suspense>
         </div>
