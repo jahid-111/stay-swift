@@ -25,9 +25,12 @@ const HotelSummaryInfo = ({ hotelInfo, checkin, checkout, fromListPage }) => {
           )}
         </div>
         <div>
-          <span className="font-semibold text-xl bg-gray-200 px-3  rounded-sm ">
-            {hotelInfo?.propertyCategory} ⭐
-          </span>
+          <p>
+            <span className="font-semibold text-xl bg-gray-200 px-3  rounded-sm ">
+              {hotelInfo?.propertyCategory} ⭐
+            </span>
+          </p>
+          <p> Amenities : {hotelInfo?.amenities.length}</p>
         </div>
       </div>
 

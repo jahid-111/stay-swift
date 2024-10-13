@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  dbConnect();
+  await dbConnect();
   return (
     <html lang="en">
       <body

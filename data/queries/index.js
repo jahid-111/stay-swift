@@ -1,3 +1,4 @@
+import { amenitiesModel } from "@/models/amenities-model";
 import { bookingModel } from "@/models/booking-model";
 import { hotelModel } from "@/models/hotel-model";
 import { ratingModel } from "@/models/rating-model";
@@ -15,7 +16,8 @@ export async function getAllHotels(
   checkout,
   category,
   sortByPrice,
-  range
+  range,
+  amenity
 ) {
   const regex = new RegExp(destination, "i");
 
@@ -28,10 +30,45 @@ export async function getAllHotels(
       "lowRate",
       "city",
       "propertyCategory",
+      "amenities",
     ])
     .lean();
 
   let allHotels = hotelsByDestination; // Things  Of all
+
+  const allAmenities = await getAmenities();
+
+  const fromHotelAmenity = allHotels.map((hotel) =>
+    replaceMongoIdInArray(hotel.amenities)
+  );
+
+  const flatFromHotelAmenity = [].concat(...fromHotelAmenity);
+
+  const dataAmenities = allAmenities.filter(
+    (amenities) => !flatFromHotelAmenity.includes(amenities.id)
+  );
+
+  if (amenity) {
+    const matchAmenityIds = amenity.split("|");
+
+    const matchAmenity = dataAmenities.filter((aId) =>
+      matchAmenityIds.some((id) => aId.name.includes(id))
+    );
+
+    const selectedAmenityIds = matchAmenity.map((select) => select.id);
+
+    const hotelAmenitiesIds = allHotels.map((hotel) =>
+      hotel.amenities
+        ? hotel.amenities.map((amenityHotel) => amenityHotel.toString())
+        : []
+    );
+
+    allHotels = allHotels.filter((hotel, index) => {
+      return hotelAmenitiesIds[index].some((amenityId) =>
+        selectedAmenityIds.includes(amenityId)
+      );
+    });
+  }
 
   if (range) {
     const rangeMatch = range.split("|");
@@ -123,4 +160,14 @@ export async function getUserBookings(userId) {
   const bookings = await bookingModel.find({ userId: userId }).lean();
 
   return replaceMongoIdInArray(bookings);
+}
+
+export async function getAmenities() {
+  try {
+    const amenities = await amenitiesModel.find({}).lean();
+    return replaceMongoIdInArray(amenities);
+  } catch (error) {
+    console.error("Error fetching amenities:", error);
+    throw new Error("Failed to fetch amenities");
+  }
 }

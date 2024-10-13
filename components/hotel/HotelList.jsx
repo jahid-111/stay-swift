@@ -9,6 +9,7 @@ const HotelList = async ({
   category,
   sortBy,
   range,
+  amenity,
 }) => {
   const allHotels = await getAllHotels(
     destination,
@@ -16,10 +17,11 @@ const HotelList = async ({
     checkout,
     category,
     sortBy,
-    range
+    range,
+    amenity
   );
 
-  // console.log("'🤗🤗🤗", range);
+  // console.log("'🤗🤗🤗", amenity);
   return (
     <div className="col-span-9">
       <div className="space-y-4">
